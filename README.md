@@ -1,1 +1,3 @@
-LeetCode Solutions Automated
+# LeetCode Solutions Automated
+
+### Using LeetSync Extension
