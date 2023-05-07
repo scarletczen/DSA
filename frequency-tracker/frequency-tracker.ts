@@ -1,41 +1,31 @@
 // Two Hashmaps Solution 
 class FrequencyTracker {
-    value:number[];
     numberCount:Map<number,number>
     freqCount:Map<number,number>;
     
     constructor() {
-        this.value = [];
         this.freqCount = new Map();
         this.numberCount = new Map();
     }
    
     add(number: number): void {
-        this.numberCount[number] = ++this.numberCount[number] || 1;
-        
-        if (this.numberCount[number] > 1) {
-            this.freqCount[this.numberCount[number] - 1].delete(number);
+        if(this.numberCount.has(number)){
+            this.freqCount.set(this.numberCount.get(number),(this.freqCount.get(this.numberCount.get(number)) || 0) - 1);
         }
-        
-        if (!this.freqCount[this.numberCount[number]]) {
-            this.freqCount[this.numberCount[number]] = new Set();
-        }
-        this.freqCount[this.numberCount[number]].add(number);
+        this.numberCount.set(number,(this.numberCount.get(number)||0)+1);
+        this.freqCount.set(this.numberCount.get(number),(this.freqCount.get(this.numberCount.get(number)) || 0) + 1);
     }
 
     deleteOne(number: number): void {
-        if (this.numberCount[number]) {
-            this.freqCount[this.numberCount[number]].delete(number);
-            this.numberCount[number]--;
-            if (this.numberCount[number]) {
-                this.freqCount[this.numberCount[number]].add(number);
-            }
-        }
-       
+       if(this.numberCount.has(number) && this.numberCount.get(number) > 0){
+            this.freqCount.set(this.numberCount.get(number),(this.freqCount.get(this.numberCount.get(number)) || 0) - 1);
+            this.numberCount.set(number,(this.numberCount.get(number)||0)-1);
+            this.freqCount.set(this.numberCount.get(number),(this.freqCount.get(this.numberCount.get(number)) || 0) + 1);
+       }
     }
 
     hasFrequency(frequency: number): boolean {
-        return !!this.freqCount[frequency]?.size;
+        return (this.freqCount.get(frequency) > 0);
     }
 }
 
