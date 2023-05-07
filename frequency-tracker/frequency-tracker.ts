@@ -1,3 +1,4 @@
+// Two Hashmaps Solution 
 class FrequencyTracker {
     value:number[];
     numberCount:Map<number,number>
@@ -10,29 +11,31 @@ class FrequencyTracker {
     }
    
     add(number: number): void {
-         this.numberCount[number] = ++this.numberCount[number] || 1;
-    if (this.numberCount[number] > 1) {
-        this.freqCount[this.numberCount[number] - 1].delete(number);
-    }
-    if (!this.freqCount[this.numberCount[number]]) {
-        this.freqCount[this.numberCount[number]] = new Set();
-    }
-    this.freqCount[this.numberCount[number]].add(number);
+        this.numberCount[number] = ++this.numberCount[number] || 1;
+        
+        if (this.numberCount[number] > 1) {
+            this.freqCount[this.numberCount[number] - 1].delete(number);
+        }
+        
+        if (!this.freqCount[this.numberCount[number]]) {
+            this.freqCount[this.numberCount[number]] = new Set();
+        }
+        this.freqCount[this.numberCount[number]].add(number);
     }
 
     deleteOne(number: number): void {
-       if (this.numberCount[number]) {
-        this.freqCount[this.numberCount[number]].delete(number);
-        this.numberCount[number]--;
         if (this.numberCount[number]) {
-            this.freqCount[this.numberCount[number]].add(number);
+            this.freqCount[this.numberCount[number]].delete(number);
+            this.numberCount[number]--;
+            if (this.numberCount[number]) {
+                this.freqCount[this.numberCount[number]].add(number);
+            }
         }
-    }
        
     }
-    
+
     hasFrequency(frequency: number): boolean {
-    return !!this.freqCount[frequency]?.size;
+        return !!this.freqCount[frequency]?.size;
     }
 }
 
