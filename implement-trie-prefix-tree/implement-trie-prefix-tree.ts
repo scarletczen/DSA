@@ -1,5 +1,5 @@
 class TrieNode{
-    children:{};
+    children:Record<string,TrieNode>;
     endOfWord:boolean;
     constructor(){
         this.children = {};
