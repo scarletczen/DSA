@@ -1,10 +1,17 @@
 type F = (x: number) => number;
 
-// Reduce Right Solution O(N)
+// Simple For Loop Solution
 function compose(functions: F[]): F {
-    // Acc stores result of every function call
-    // Reduce right is the same as reduce but right to left
-	 return x => functions.reduceRight((acc,f)=>f(acc),x)
+    return function(x:number):ReturnType<F> {
+        let length = functions.length;
+        if (length === 0) return x;
+        let num=x;
+        for (let i = length - 1; i >= 0; i--) {
+            let cfun = functions[i];
+            num=cfun(num);
+        }
+        return num;
+    };
 };
 
 /**
