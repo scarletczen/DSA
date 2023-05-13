@@ -3,14 +3,14 @@
 type Fn = (...params:any)=>any;
 
 function memoize(fn: Fn): Fn {
-    const argsToResult: Map<string, ReturnType<Fn>> = new Map();
+    const storedResults: Map<string, ReturnType<Fn>> = new Map();
     return function(...args: Parameters<Fn>): ReturnType<Fn> {
         const hash: string = args.join(',');
-        const result: ReturnType<Fn> = argsToResult.get(hash) ?? fn(...args);
-        if (!argsToResult.has(hash)) {
-            argsToResult.set(hash, result);
+        const currentResult: ReturnType<Fn> = storedResults.get(hash) ?? fn(...args);
+        if (!storedResults.has(hash)) {
+            storedResults.set(hash, currentResult);
         }
-        return result;
+        return currentResult;
     }
 }
 
