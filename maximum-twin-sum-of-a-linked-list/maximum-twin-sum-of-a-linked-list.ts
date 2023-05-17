@@ -9,17 +9,30 @@
  *     }
  * }
  */
-// Simple Stack Solution O(N) Space O(N)
+// Reverse Second Half Solution Time O(N) Space O(1)
 function pairSum(head: ListNode | null): number {
-    let nodeStack:number[] = [];
-    while(head != null){
-        nodeStack.push(head.val);
-        head = head.next;
+    let slow = head; 
+    let fast = head;
+    // Hare and Rabbit Traversal
+    while (fast && fast.next){
+        fast = fast.next?.next;
+        slow = slow.next;
     }
-    let max = 0;
-
-    for (let i =0; i<nodeStack.length; i++){
-        max = Math.max(max, nodeStack[i] + nodeStack[nodeStack.length - i - 1]);
-    }    
-    return max;
+    let prev = null;
+    let nextNode = new ListNode();
+    // Reverse the list
+    while(slow){
+        nextNode = slow.next;
+        slow.next = prev;
+        prev = slow;
+        slow = nextNode;
+    }
+    // Get Maximum Pair
+    let maxVal = 0;
+    while(prev){
+        maxVal = Math.max(maxVal, prev.val + head.val);
+        head = head.next;
+        prev = prev.next;
+    }
+    return maxVal;
 };
