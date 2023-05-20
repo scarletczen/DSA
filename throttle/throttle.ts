@@ -1,12 +1,12 @@
 type F = (...args: any[]) => void
 // Throttling with Stored Arguments
 function throttle(fn: F, t: number): F {
-    let wait = false;
-    let storedArgs = null;
+    let shouldWait = false;
+    let storedArgs:number[]|null = null;
 
     function checkStoredArgs () {
         if (storedArgs === null) {
-            wait = false;
+            shouldWait = false;
         } else {
         fn(...storedArgs);
         storedArgs = null;
@@ -15,13 +15,13 @@ function throttle(fn: F, t: number): F {
     }
 
     return (...args) => {
-        if (wait) {
+        if (shouldWait) {
             storedArgs = args;
             return;
         }
 
         fn(...args);
-        wait = true;
+        shouldWait = true;
         setTimeout(checkStoredArgs, t);
     }
 };
