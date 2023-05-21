@@ -1,9 +1,9 @@
 // Deep Equals Implementation
 function areDeeplyEqual(o1: any, o2: any): boolean {
- // All equal values and same objects are eliminated
+ // equal values and same objects are eliminated
     if (o1 === o2) return true;
     
-    // If any of o1 or o2 is not an object, they are different values
+    // o1 or o2 is not an object, they are different values
     if (typeof o1 !== 'object' || typeof o2 !== 'object') return false;
 
     // Both of them should be objects or arrays
