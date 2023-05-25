@@ -1,4 +1,5 @@
 // Simple Array Slice Solution
+
 function chunk(arr: any[], size: number): any[][] {
     let result = [];
     let index = 0;
