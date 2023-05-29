@@ -1,12 +1,6 @@
 class ParkingSystem {
-    big:number;
-    medium:number;
-    small:number;
     slots:number[];
     constructor(big: number, medium: number, small: number) {
-        this.big = big;
-        this.medium = medium;
-        this.small = small;
         this.slots = [big, medium, small];
     }
 
