@@ -1,7 +1,9 @@
 class ArrayWrapper {
 	value:number[];
+    stringified: string;
     constructor(nums: number[]) {
         this.value = nums;
+        this.stringified = JSON.stringify(nums);
     }
 
 	valueOf() {
@@ -9,7 +11,7 @@ class ArrayWrapper {
     }
 
 	toString() {
-        return JSON.stringify(this.value);
+        return this.stringified;
     }
 };
 
