@@ -1,12 +1,11 @@
-const cache: number[] = []
-
-function climbStairs(n: number): number {
+// DP Memoization Time O(N) Space O(N)
+function climbStairs(n: number, cache = []): number {
   if (n in cache){
       return cache[n]
   }
   if (n <= 2) return n
   else {
-  cache[n] = climbStairs(n - 2) + climbStairs(n - 1) 
+  cache[n] = climbStairs(n - 2, cache) + climbStairs(n - 1, cache) 
   }
   return cache[n]
 }
