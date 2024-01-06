@@ -1,26 +1,22 @@
-// Tabulation + Binary Search Time O(n log n) Space O(n)
+// Memoization Time O(n^2) Space O(n)
 function jobScheduling(startTime: number[], endTime: number[], profit: number[]): number {
     const jobs = [];
-    const dp = Array(startTime.length + 1).fill(0);
+    const memo = Array(startTime.length).fill(null);
 
     for(let i=0; i<startTime.length; i++){
         jobs[i] = [startTime[i], endTime[i], profit[i]];
     }
     jobs.sort((a,b)=>a[0]-b[0]);
 
-    function binarySearch(idx){
-        let low = idx+1;
-        let high = jobs.length;
-        while (low < high){
-            const mid = Math.floor((low+high)/2);
-            if (jobs[mid][0] >= jobs[idx][1]) high = mid;
-            else low = mid + 1;
-        }
-        return low;
+    function run(idx:number){
+       if (idx >= jobs.length) return 0;
+       if (memo[idx]) return memo[idx];
+       const dontTake = run(idx+1);
+       let curr = idx;
+       while(curr < jobs.length && jobs[curr][0] < jobs[idx][1]) curr++;
+       const take = run(curr) + jobs[idx][2];
+       memo[idx] = Math.max(dontTake, take);
+       return memo[idx];
     }
-    for(let i=jobs.length-1; i>=0; i--){
-        const next = binarySearch(i);
-        dp[i] = Math.max(dp[i+1], jobs[i][2] + dp[next])
-    }
-    return dp[0];
+    return run(0);
 };
