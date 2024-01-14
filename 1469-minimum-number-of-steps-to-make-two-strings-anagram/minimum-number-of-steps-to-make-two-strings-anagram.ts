@@ -6,6 +6,7 @@ function minSteps(s: string, t: string): number {
         count[s[i].charCodeAt(0) - 'a'.charCodeAt(0)]++;
         count[t[i].charCodeAt(0) - 'a'.charCodeAt(0)]--;
     }
+    
     for(let n of count){
         if(n>0){
             sum+=n;
