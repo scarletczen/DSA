@@ -1,4 +1,4 @@
-var longestCommonSubsequence = function(text1, text2) {
+function longestCommonSubsequence(text1:string, text2:string) {
     const dp = [];
     let m = text1.length;
     let n = text2.length;
