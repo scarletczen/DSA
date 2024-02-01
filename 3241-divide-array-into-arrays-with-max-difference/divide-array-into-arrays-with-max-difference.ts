@@ -1,3 +1,4 @@
+// Time O(nlogn) Space O(n)
 function divideArray(nums: number[], k: number): number[][] {
     const sortedNums = [...nums].sort((a,b)=>a-b);
     const ans = [];
