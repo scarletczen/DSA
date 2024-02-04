@@ -1,3 +1,2 @@
-# LeetCode Solutions Automated
-
-### Using LeetSync Extension
+# LeetCode Solutions For Typescript
+Happy leetcoding :)
